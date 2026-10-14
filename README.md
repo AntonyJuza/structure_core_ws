@@ -31,7 +31,7 @@ source install/setup.bash
 
 ### 3. Launch the Driver
 
-#### Option A: Using the Convenience Script
+#### Option A: Camera Connected Locally (PC)
 ```bash
 # 1. Launch camera driver
 ./start_structure_core.sh
@@ -40,18 +40,31 @@ source install/setup.bash
 ./start_structure_core.sh --rviz
 ```
 
-#### Option B: Using ROS 2 Launch
-```bash
-source install/setup.bash
+#### Option B: Camera Connected to Remote Raspberry Pi
+When the Structure Core is plugged into a **Raspberry Pi** and you want to visualize streams on your **PC**:
 
-# Standard launch
-ros2 launch structure_core_ros2_driver sc.launch.py
+1. **On the Raspberry Pi (headless, low overhead):**
+   ```bash
+   # In depth_ws on the Pi:
+   source /opt/ros/jazzy/setup.bash
+   source install/setup.bash
+   ros2 launch structure_core_ros2_driver sc.launch.py
+   ```
 
-# Launch with RViz2 visualization
-ros2 launch structure_core_ros2_driver sc.launch.py use_rviz:=true
-```
+2. **On your PC (RViz visualization):**
+   ```bash
+   # Convenience script:
+   ./view_structure_core.sh
+
+   # Or via ROS 2 launch:
+   source /opt/ros/jazzy/setup.bash
+   source install/setup.bash
+   ros2 launch structure_core_ros2_driver sc_rviz2.launch.py
+   ```
+   *(Ensure both Pi and PC are on the same network and have matching `ROS_DOMAIN_ID`)*
 
 ---
+
 
 ## 📡 Published Topics
 

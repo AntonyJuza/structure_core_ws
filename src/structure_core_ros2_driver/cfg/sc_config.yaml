@@ -1,7 +1,7 @@
 /**:
   ros__parameters:
     visible_enable:                       true
-    visible_apply_gamma_correction:       false
+    visible_apply_gamma_correction:       true          # Enable gamma curve to brighten dark areas
     visible_framerate:                    30.0
     visible_resolution:                   "Default"
     infrared_enable:                      false
@@ -27,8 +27,8 @@
     rgbd_enable:                          true
 
     # Dynamic parameters
-    visible_initial_gain:                 2.0           # 1.0 ... 8.0
-    visible_initial_exposure:             0.016         # 0.0 ... 0.03
+    visible_initial_gain:                 4.5           # 1.0 ... 8.0 (increased for indoor brightness)
+    visible_initial_exposure:             0.028         # 0.0 ... 0.03 (increased exposure time)
     infrared_auto_exposure_enabled:       false
     infrared_initial_exposure:            0.0146        # 0.0 ... 0.03
     infrared_initial_gain:                3.0           # 0.0 ... 3.0
