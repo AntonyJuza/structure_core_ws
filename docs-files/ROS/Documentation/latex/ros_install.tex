@@ -1,0 +1,58 @@
+\hypertarget{ros_install_prerequisites}{}\section{Prerequisites}\label{ros_install_prerequisites}
+
+\begin{DoxyItemize}
+\item Ubuntu 16.\+04
+\item R\+OS Kinetic Structure Core S\+DK = 0.\+9
+
+or
+\item Ubuntu 18.\+04
+\item R\+OS Melodic Structure Core S\+DK = 0.\+9
+\end{DoxyItemize}
+
+All dependencies for R\+O\+S1 and Structure Core S\+DK must also be installed. The R\+O\+S1 wrapper is compatible with x86\+\_\+64 and arm64 (arch64) architectures.\hypertarget{ros_install_package_installation}{}\section{Package Installation}\label{ros_install_package_installation}
+Open a bash terminal and initialize a new {\bfseries catkin} workspace. Copy the S\+DK Cross-\/platform folder into this workspace.
+
+
+\begin{DoxyCode}
+1 cd 
+2 mkdir -p catkin\_ws/src 
+3 cd ~/catkin\_ws/src
+4 cp StructureSDK-CrossPlatform-0.9
+5 cd StructureSDK-CrossPlatform-0.9
+\end{DoxyCode}
+
+
+Run the {\bfseries to\+\_\+ros1.\+sh} script.
+
+
+\begin{DoxyCode}
+1 chmod 755 to\_ros1.sh
+2 source to\_ros1.sh
+\end{DoxyCode}
+
+
+How to build and install examples can follow (\hyperlink{ros_start_integration}{Integration with other packages}) and then run following commands \+:
+
+
+\begin{DoxyCode}
+1 chmod 755 to\_ros1.sh
+2 source to\_ros1.sh BUILD\_EXAMPLES
+\end{DoxyCode}
+
+
+Use catkin to build the R\+O\+S1 for Structure Core at the top of the directory.
+
+
+\begin{DoxyCode}
+1 cd ../../..
+2 catkin\_make
+\end{DoxyCode}
+
+
+And finally, initialize your R\+OS environment\+:
+
+
+\begin{DoxyCode}
+1 source ./devel/setup.bash
+\end{DoxyCode}
+ 

@@ -1,0 +1,38 @@
+/**:
+  ros__parameters:
+    visible_enable:                       true
+    visible_apply_gamma_correction:       false
+    visible_framerate:                    30.0
+    visible_resolution:                   "Default"
+    infrared_enable:                      false
+    infrared_framerate:                   30.0
+    infrared_mode:                        "Default"     # HowMany, BothCameras, RightCameraOnly, LeftCameraOnly
+    infrared_resolution:                  "Default"
+    infrared_disable_intensity_balance:   true
+    imu_enable:                           false
+    imu_update_rate:                      "Default"     # HowMany, AccelAndGyro_1000Hz, AccelAndGyro_400Hz, AccelAndGyro_200Hz, AccelAndGyro_100Hz
+    depth_enable:                         true
+    depth_aligned_enable:                 true
+    depth_pcloud_enable:                  false
+    depth_framerate:                      30.0
+    depth_resolution:                     "Default"     # SXGA, VGA, QVGA, HowMany, _1280x960, _640x480, _320x240
+    depth_apply_correction_before_stream: false
+    demosaic_method:                      "EdgeAware"   # Bilinear, EdgeAware, HowMany, Default
+    initial_projector_power:              1.0           # 0.0 ... 1.0
+    latency_reducer_enabled:              true
+    sensor_initialization_timeout:        20000
+    sensor_serial:                        "null"
+    frame_sync_enabled:                   true
+    low_latency_imu:                      false
+    rgbd_enable:                          true
+
+    # Dynamic parameters
+    visible_initial_gain:                 2.0           # 1.0 ... 8.0
+    visible_initial_exposure:             0.016         # 0.0 ... 0.03
+    infrared_auto_exposure_enabled:       false
+    infrared_initial_exposure:            0.0146        # 0.0 ... 0.03
+    infrared_initial_gain:                3.0           # 0.0 ... 3.0
+    depth_apply_correction:               true
+    depth_range_mode:                     1             # -1: Default, 0: VeryShort, 1: Short, 2: Medium, 3: Long, 4: VeryLong, 5: Hybrid
+    dynamic_calibration_mode:             0             # 0: Off, 1: OneShotPersistent, 2: ContinuousNonPersistent
+    name:                                 "sc"

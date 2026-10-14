@@ -1,0 +1,123 @@
+\hypertarget{ros_main_features_published_topics}{}\section{Published Topics}\label{ros_main_features_published_topics}
+The full list of topics can be listed during program execution by running {\ttfamily rostopic list}.
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*2{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Topic }&{\bf Description  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Topic }&{\bf Description  }\\\cline{1-2}
+\endhead
+sc/color\+\_\+to\+\_\+depth\+\_\+tf &Transformation matrix to bring the visible (mono or R\+GB) camera frame into the depth frame of reference \\\cline{1-2}
+sc/depth/camera\+\_\+info &Depth frame intrinsics for the current frame \\\cline{1-2}
+sc/depth/image &Depth image (float depth values in meters) \\\cline{1-2}
+sc/imu/imu\+\_\+msg &3-\/axis accelerometer data (m/s/s) and 3-\/axis gyroscope data in Euler angles (rad/sec) \\\cline{1-2}
+sc/infrared\+\_\+left/camera\+\_\+info &Left infrared intrinsics for the current frame \\\cline{1-2}
+sc/infrared\+\_\+left/image &Left infrared image (16bit data) \\\cline{1-2}
+sc/infrared\+\_\+right/camera\+\_\+info &Right infrared intrinsics for the current frame \\\cline{1-2}
+sc/infrared\+\_\+right/image &Right infrared image (16bit data) \\\cline{1-2}
+sc/rgb/camera\+\_\+info &Visible (mono or R\+GB) camera frame intrinsics for the current frame \\\cline{1-2}
+sc/rgb/image &Visible camera image. Either mono or R\+GB, depending on the Structure Core model \\\cline{1-2}
+sc/rgbd/points &R\+G\+B-\/D point cloud \\\cline{1-2}
+\end{longtabu}
+\hypertarget{ros_main_features_sc_static_params}{}\section{Structure Core Static Parameters}\label{ros_main_features_sc_static_params}
+Static parameters can be modified before launch by modifying the {\bfseries launch/sc.\+launch} file for R\+O\+S-\/only runs, or the {\bfseries launch/sc\+\_\+rviz.\+launch} file for R\+O\+S+\+Rviz runs.
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*4{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Static Parameter }&{\bf Type }&{\bf Description }&{\bf Default Value  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Static Parameter }&{\bf Type }&{\bf Description }&{\bf Default Value  }\\\cline{1-4}
+\endhead
+demosaic\+\_\+method &\{{\ttfamily Edge\+Aware}, {\ttfamily Bilinear}\} &The demosaicking method to use for color-\/enabled Structure Core visible frames. Will do nothing for monochrome visible frames &{\ttfamily Edge\+Aware} \\\cline{1-4}
+depth\+\_\+apply\+\_\+correction\+\_\+before\+\_\+stream &boolean &Set to true to apply a correction and clean filter to the depth before streaming. Depth frames received from the driver are post-\/processed before arrival. &false \\\cline{1-4}
+depth\+\_\+enable &boolean &Set to true to enable depth streaming &false \\\cline{1-4}
+depth\+\_\+framerate &integer &The target framerate for the depth sensor &30 \\\cline{1-4}
+depth\+\_\+resolution &\{{\ttfamily 640x480}, {\ttfamily 320x240}, {\ttfamily 1280x960}\} &The target resolution for streamed depth frames &{\ttfamily 640x480} \\\cline{1-4}
+frame\+\_\+sync\+\_\+enabled &boolean &Set to true to enable frame synchronization between the visible and depth streams &false \\\cline{1-4}
+imu\+\_\+enable &boolean &Set to true to enable accelerometer and gyroscope streaming &false \\\cline{1-4}
+imu\+\_\+update\+\_\+rate &\{{\ttfamily Accel\+And\+Gyro\+\_\+800\+Hz}, {\ttfamily Accel\+And\+Gyro\+\_\+100\+Hz}, {\ttfamily Accel\+And\+Gyro\+\_\+200\+Hz}, {\ttfamily Accel\+And\+Gyro\+\_\+1000\+Hz}\} &the target streaming rate for I\+MU data &{\ttfamily Accel\+And\+Gyro\+\_\+800\+Hz} \\\cline{1-4}
+infrared\+\_\+disable\+\_\+intensity\+\_\+balance &boolean &Setting this to true will eliminate saturation issues, but might result in sparser depth &false \\\cline{1-4}
+infrared\+\_\+enable &boolean &Set to true to enable infrared streaming &false \\\cline{1-4}
+infrared\+\_\+framerate &integer &The target framerate for the infrared camera&30 \\\cline{1-4}
+infrared\+\_\+mode &\{{\ttfamily Both\+Cameras}, {\ttfamily Left\+Camera\+Only}, {\ttfamily Right\+Camera\+Only}\} &Specifies how to stream the infrared frames &{\ttfamily Both\+Cameras} \\\cline{1-4}
+infrared\+\_\+resolution &\{{\ttfamily 1280x960}\} &The target resolution at which to stream depth frames &{\ttfamily 1280x960} \\\cline{1-4}
+initial\+\_\+projector\+\_\+power &float (0.\+0 -\/ 1.\+0\mbox{]} &Laser projector power setting from 0.\+0 to 1.\+0 inclusive. Projector will only activate if required by streaming configuration &1.\+0 \\\cline{1-4}
+latency\+\_\+reducer\+\_\+enabled &boolean &Setting this to true will reduce latency. Frame dropping might increase &false \\\cline{1-4}
+low\+\_\+latency\+\_\+imu &boolean &Set to true to deliver I\+MU events on a separate, dedicated background thread &false \\\cline{1-4}
+rgbd\+\_\+enable &boolean &Set to true to enable R\+G\+B-\/D streaming &false \\\cline{1-4}
+rviz\+\_\+frame &boolean &Set to true to change point cloud reference frame to rviz frame &false \\\cline{1-4}
+sensor\+\_\+initialization\+\_\+timeout &integer &Maximum amount of time (in milliseconds) to wait for a sensor to connect before throwing a timeout error &6000 \\\cline{1-4}
+sensor\+\_\+serial &string &Serial number of the sensor to stream. If null, the first connected sensor will be used &null \\\cline{1-4}
+visible\+\_\+apply\+\_\+gamma\+\_\+correction &boolean &Set to true to apply gamma correction to incoming visible frames &false \\\cline{1-4}
+visible\+\_\+enable &boolean &Set to true to enable visible streaming &false \\\cline{1-4}
+visible\+\_\+framerate &integer &The target framerate for the visible camera &30 \\\cline{1-4}
+visible\+\_\+resolution &\{{\ttfamily 640x480}\} &The target resolution for streamed visible frames &{\ttfamily 640x480} \\\cline{1-4}
+\end{longtabu}
+\hypertarget{ros_main_features_sc_dynamic_params}{}\section{Structure Core Dynamic Parameters}\label{ros_main_features_sc_dynamic_params}
+The following parameters are dynamic and can be changed during program execution, without restarting the Structure Core R\+OS driver. They can be accessed by using the {\ttfamily /sc/sc\+\_\+node/} prefix, e.\+g. {\ttfamily /sc/sc\+\_\+node/visible\+\_\+initial\+\_\+gain}.
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*4{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Dynamic Parameter }&{\bf Type }&{\bf Description }&{\bf Default Value  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Dynamic Parameter }&{\bf Type }&{\bf Description }&{\bf Default Value  }\\\cline{1-4}
+\endhead
+depth\+\_\+apply\+\_\+correction &boolean &Applies a correction and clean filter to the depth on-\/the-\/fly, modifying the current depth frame in place. Note that if {\ttfamily depth\+\_\+apply\+\_\+correction\+\_\+before\+\_\+stream} is true, this setting does nothing, as the correction has already been applied in the driver before frame arrival &false \\\cline{1-4}
+depth\+\_\+range\+\_\+mode &\{{\ttfamily Very\+Short}, {\ttfamily Short}, {\ttfamily Medium}, {\ttfamily Long}, {\ttfamily Very\+Long}, {\ttfamily Hybrid}, {\ttfamily Body\+Scanning}\} &The depth range mode for streamed depth frames. Modifies the min/max range of the depth values.~\newline
+ -\/ Very\+Short\+: 0.\+35m -\/ 0.\+92m ~\newline
+ -\/ Short\+: 0.\+41m -\/ 1.\+36m~\newline
+ -\/ Medium\+: 0.\+52m -\/ 5.\+23m~\newline
+ -\/ Long\+: 0.\+58m -\/ 8.\+0m~\newline
+ -\/ Very\+Long\+: 0.\+58m -\/ 10.\+0m~\newline
+ -\/ Hybrid\+: 0.\+35m -\/ 10.\+0m~\newline
+ -\/ Body\+Scanning\+: Specific configuration for scanning bodies. &{\ttfamily Short} \\\cline{1-4}
+dynamic\+\_\+calibration\+\_\+mode &\{{\ttfamily Off}, {\ttfamily One\+Shot\+Persistent}, {\ttfamily Continuous\+Non\+Persistent}\} &The dynamic calibration mode to use during depth streaming.~\newline
+ -\/ One\+Shot\+Persistent\+: a single dynamic calibration cycle is performed when depth streaming starts. ~\newline
+ -\/ Continuous\+Non\+Persistent\+: dynamic calibration is performed continuously as the sensor streams depth data &{\ttfamily Off} \\\cline{1-4}
+infrared\+\_\+auto\+\_\+exposure\+\_\+enabled &boolean &Enable auto-\/exposure for infrared frames &false \\\cline{1-4}
+infrared\+\_\+initial\+\_\+exposure &float \mbox{[}0.\+0 -\/ 0.\+03\mbox{]} &The initial exposure on the infrared cameras &0.\+0146 \\\cline{1-4}
+infrared\+\_\+initial\+\_\+gain &integer \mbox{[}0 -\/ 3\mbox{]} &The initial gain on the infrared cameras &3 \\\cline{1-4}
+visible\+\_\+initial\+\_\+exposure &float \mbox{[}0.\+0 -\/ 0.\+03\mbox{]} &The initial exposure on the visible camera, in seconds &0.\+016 \\\cline{1-4}
+visible\+\_\+initial\+\_\+gain &integer \mbox{[}1 -\/ 8\mbox{]} &The initial gain on the visible camera &2.\+0 \\\cline{1-4}
+\end{longtabu}
+~\newline
+\hypertarget{ros_main_features_mod_dynamic_params_ros}{}\subsection{Modifying Parameters (\+R\+O\+S)}\label{ros_main_features_mod_dynamic_params_ros}
+Use the {\ttfamily rqt\+\_\+reconfigure} R\+OS package to change dynamic parameters\+:
+
+
+\begin{DoxyCode}
+1 rosrun rqt\_reconfigure rqt\_reconfigure
+\end{DoxyCode}
+
+
+The {\bfseries rqt\+\_\+reconfigure} window looks like this\+:
+
+
+
+~\newline
+\hypertarget{ros_main_features_mod_dynamic_params_ros2}{}\subsection{Modifying Parameters (\+R\+O\+S2)}\label{ros_main_features_mod_dynamic_params_ros2}
+The {\bfseries ros2 param} command line tool allows users to change dynamic parameters.
+
+
+\begin{DoxyItemize}
+\item Use {\ttfamily ros2 param list} to list all static and dynamic parameters for Structure Core.
+\item Set a dynamic parameter using the {\ttfamily set} command, e.\+g.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}
+1 ros2 param set /sc/sc\_node/<dynamic parameter> <value>
+\end{DoxyCode}
+ 

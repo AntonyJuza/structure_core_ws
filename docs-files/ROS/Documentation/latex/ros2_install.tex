@@ -1,0 +1,61 @@
+\hypertarget{ros2_install_prerequisites2}{}\section{Prerequisites}\label{ros2_install_prerequisites2}
+
+\begin{DoxyItemize}
+\item Ubuntu 18.\+04
+\item R\+OS Crystal Clemmys Structure Core S\+DK = 0.\+9
+\end{DoxyItemize}
+
+All dependencies for R\+OS and Structure Core S\+DK must also be installed. The R\+O\+S2 wrapper is available for both x86\+\_\+64 and arm64 (arch64) architectures.\hypertarget{ros2_install_package2_installation}{}\section{Package Installation}\label{ros2_install_package2_installation}
+Open a bash terminal and initialize new {\bfseries R\+O\+S2} workspace. Copy the S\+DK Cross-\/platform folder into this workspace.
+
+
+\begin{DoxyCode}
+1 cd 
+2 mkdir -p colcon\_ws/src 
+3 cd ~/colcon\_ws/src
+4 cp StructureSDK-CrossPlatform-0.9
+\end{DoxyCode}
+
+
+Download the {\ttfamily image\+\_\+common} package for R\+O\+S2.
+
+
+\begin{DoxyCode}
+1 git clone https://github.com/ros-perception/image\_common.git
+2 cd image\_common
+3 git fetch origin ros2:ros2
+4 git checkout ros2
+5 git checkout eb4680dcfa35fc47e5f0329916a37d743323fd6c
+6 
+7 cd ../StructureSDK-CrossPlatform-0.9
+\end{DoxyCode}
+
+
+Run the {\bfseries to\+\_\+ros2.\+sh} script.
+
+
+\begin{DoxyCode}
+1 chmod 755 to\_ros2.sh
+2 source to\_ros2.sh
+\end{DoxyCode}
+
+
+Use colcon to build the R\+O\+S2 for Structure Core. Colcon supports the option {\ttfamily -\/-\/symlink-\/install}, which allows the installed files to be changed in the source space (e.\+g. Python files or other not compiled resourced) for faster iteration.
+
+You will need to copy ros2 folder under colcon\+\_\+ws/src and change S\+C\+S\+D\+K\+\_\+\+R\+O\+OT path toward S\+DK ros2/\+C\+Make\+Lists.\+txt e.\+g\+: set(S\+C\+S\+D\+K\+\_\+\+R\+O\+OT \$\{P\+A\+R\+E\+N\+T\+\_\+\+D\+IR\}/\+Structure\+S\+D\+K-\/\+Cross\+Platform-\/0.7.\+3/)
+
+
+\begin{DoxyCode}
+1 cp -r ros2/ ../..
+2 cd ../../..
+3 colcon build --symlink-install
+\end{DoxyCode}
+
+
+And finally, initialize your R\+OS environment\+:
+
+
+\begin{DoxyCode}
+1 source ./install/setup.bash
+\end{DoxyCode}
+ 

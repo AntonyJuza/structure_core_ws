@@ -1,0 +1,54 @@
+Do you care about how your Git commits look like? A great software practitioner does, indeed. Let\textquotesingle{}s review a couple of basic tips for developers that make the Git commit log look good and teamwork with Git source control more fun.\hypertarget{git_tips_git_tips_introduce}{}\section{1) Introduce yourself to Git}\label{git_tips_git_tips_introduce}
+When searching through the commit history your fellow developers would like to recognize that this particular awesome commit was created by you. Before your first commit, please, introduce yourself to Git. Tell Git your name and email address\+: 
+\begin{DoxyCode}
+1 git config --global user.name "Ales Nosek"
+2 git config --global user.email "anosek@verimatrix.com"
+\end{DoxyCode}
+\hypertarget{git_tips_git_tips_commit}{}\section{2) Commit message formatting}\label{git_tips_git_tips_commit}
+Respect the conventions for Git commit message formatting. The first line of the commit message is a short (50 chars or less) summary. The first letter of the summary is capitalized and there\textquotesingle{}s no dot at the end of the summary. The summary begins with a reference to the issue in your bug tracking system if available. Use imperative in your summary line as you\textquotesingle{}d be commanding your code to do something, i.\+e. write \char`\"{}\+Remove obsolete code\char`\"{} instead of \char`\"{}\+Removed obsolete code\char`\"{} or \char`\"{}\+Removes obsolete code\char`\"{}. More detailed explanatory text comes after a blank line. Here is a model Git commit message\+:
+
+
+\begin{DoxyCode}
+1 PROJXREF-27 Remove obsolete code in component X
+2 
+3 The logging functionality in component X is not needed anymore.
+4 Component Y took over the logging responsibility.
+\end{DoxyCode}
+
+
+See also this \href{http://chris.beams.io/posts/git-commit/}{\tt article} for more detailed explanation and examples.\hypertarget{git_tips_git_tips_unit}{}\section{3) One commit per unit of work}\label{git_tips_git_tips_unit}
+Create one commit per unit of work. A combined commit like \char`\"{}\+Add method X, correct indention, clean up whitespaces\char`\"{} is harder to review. Break your changes down into multiple commits, e.\+g. three commits \char`\"{}\+Add method X\char`\"{}, \char`\"{}\+Correct indention\char`\"{} and \char`\"{}\+Clean up whitespaces\char`\"{}.\hypertarget{git_tips_git_tips_diff}{}\section{4) git diff -\/-\/cached}\label{git_tips_git_tips_diff}
+Before commiting {\itshape always} check your code changes. Make sure that your commit includes only the changes you intended to commit. Let your debug code and test modifications not flow into the production code base. Before committing double-\/check your changes with\+: 
+\begin{DoxyCode}
+1 git diff --cached
+\end{DoxyCode}
+\hypertarget{git_tips_git_tips_trailing}{}\section{5) Trailing whitespaces}\label{git_tips_git_tips_trailing}
+Whitespace changes in the commit diffs decrease the readability of the commit diffs and make code review less fun. You can configure your editor to remove the trailing whitespaces for you on file save. Perhaps a better option though is to instruct Git to clean up the trailing white spaces automatically before comitting. You can use the commit hook \href{http://stackoverflow.com/questions/591923/make-git-automatically-remove-trailing-whitespace-before-committing/3516525#3516525}{\tt here} to do exactly that. Save the commit hook as file named {\ttfamily pre-\/commit}. Install the {\ttfamily pre-\/commit} script into your Git repository\+:
+
+
+\begin{DoxyCode}
+1 cp pre-commit my\_existing\_repo/.git/hooks
+2 chmod 755 my\_existing\_repo/.git/hooks/pre-commit
+\end{DoxyCode}
+
+
+The pre-\/commit hook will run only before the commit in this particular Git repository. If you\textquotesingle{}d like Git to install the pre-\/commit hook to every newly created/cloned repository you\textquotesingle{}ll need to add the hook file into your template directory. First tell Git where is your template directory located by adding the following into your {\ttfamily $\sim$/.gitconfig} file\+:
+
+
+\begin{DoxyCode}
+1 [init]
+2         templatedir = ~/.gittemplate
+\end{DoxyCode}
+
+
+Now you can create your Git template directory and copy the {\ttfamily pre-\/commit} hook file into it\+:
+
+
+\begin{DoxyCode}
+1 mkdir -p ~/.gittemplate/hooks
+2 cp pre-commit ~/.gittemplate/hooks
+3 chmod 755 ~/.gittemplate/hooks/pre-commit
+\end{DoxyCode}
+
+
+From now on whenever you create/clone a Git repository you should find the {\ttfamily pre-\/commit} hook file installed at {\ttfamily .git/hooks/pre-\/commit}. Git will clean up trailing whitespaces for you before you commit. 

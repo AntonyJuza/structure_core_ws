@@ -1,0 +1,27 @@
+\hypertarget{ros2_start_launch_ros2}{}\section{Launching R\+O\+S2 for Structure Core}\label{ros2_start_launch_ros2}
+Use {\bfseries ros2 launch} in a bash terminal to start\+:
+
+
+\begin{DoxyCode}
+1 ros2 launch structure\_core\_ros2\_driver sc.launch.py
+\end{DoxyCode}
+
+
+To check the data that R\+OS driver publishes use the following command\+:
+
+
+\begin{DoxyCode}
+1 ros2 topic echo <topic name here>
+\end{DoxyCode}
+\hypertarget{ros2_start_launch_ros2_rviz2}{}\section{Launching R\+O\+S2 for Structure Core with Rviz}\label{ros2_start_launch_ros2_rviz2}
+To start the R\+O\+S2 together with Rviz use the following command\+:
+
+
+\begin{DoxyCode}
+1 ros2 launch structure\_core\_ros2\_driver sc\_rviz2.launch.py
+\end{DoxyCode}
+
+
+This will start publishing messages that will be visualized in Rviz. An example visualization is below\+:
+
+ 

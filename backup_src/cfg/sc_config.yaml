@@ -1,0 +1,37 @@
+sc:
+    sc_node:
+        ros__parameters:
+            visible_enable:                       true
+            visible_apply_gamma_correction:       false
+            visible_framerate:                    30.0                               
+            visible_resolution:                   "Default"
+            infrared_enable:                      false
+            infrared_framerate:                   30.0
+            infrared_mode:                        "Default"     # HowMany, BothCameras, RightCameraOnly, LeftCameraOnly
+            infrared_resolution:                  "Default"
+            infrared_disable_intensity_balance:   true          
+            imu_enable:                           false
+            imu_update_rate:                      "Default"     # HowMany, AccelAndGyro_1000Hz, AccelAndGyro_800Hz, AccelAndGyro_200Hz, AccelAndGyro_100Hz 
+            depth_enable:                         true
+            depth_aligned_enable:                 true
+            depth_pcloud_enable:                  false                   
+            depth_framerate:                      30.0                
+            depth_resolution:                     "Default"     # SXGA, VGA, QVGA, HowMany, _1280x960, _640x480, _320x240
+            depth_apply_correction:               false     
+            demosaic_method:                      "EdgeAware"   # Bilinear, Grouping, HowMany, Default
+            initial_projector_power:              1.0           # 0.0 ... 1.0
+            latency_reducer_enabled:              true
+            sensor_initialization_timeout:        20000
+            sensor_serial:                        "null"
+            frame_sync_enabled:                   true
+            low_latency_imu:                      false
+            rgbd_enable:                          true
+            visible_initial_gain:                 2.0           # Dynamic   1.0...8.0
+            visible_initial_exposure:             0.016         # Dynamic   0.0...0.03
+            infrared_auto_exposure_enabled:       false         # Dynamic
+            infrared_initial_exposure:            0.0146        # Dynamic   0.0...0.03
+            infrared_initial_gain:                3.0           # Dynamic
+            depth_apply_correction:               true          # Dynamic
+            depth_range_mode:                     1             # Dynamic   Invalid = -1, VeryShort = 0, Short = 1, Medium = 2, Long = 3, VeryLong = 4, Hybrid = 5 
+            dynamic_calibration_mode:             0             # Dynamic   Default = Off = 0, OneShotPersistent = 1, ContinuousNonPersistent = 2
+            name:                                 "sc"          # Must match the namespace

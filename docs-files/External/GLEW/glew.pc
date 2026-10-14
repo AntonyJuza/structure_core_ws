@@ -1,0 +1,11 @@
+prefix=/media/juza/8AE62852E62840B5/PC/Home/depth_ws/install/StructureSDK-CrossPlatform
+exec_prefix=${prefix}
+libdir=/media/juza/8AE62852E62840B5/PC/Home/depth_ws/install/StructureSDK-CrossPlatform/lib
+includedir=${prefix}/include
+
+Name: glew
+Description: The OpenGL Extension Wrangler library
+Version: 2.1.0
+Cflags: -I${includedir} 
+Libs: -L${libdir} -lGLEW
+Requires: glu

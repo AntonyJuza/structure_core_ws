@@ -1,0 +1,17 @@
+<library path="lib/libSCWrapper">
+  <class name="structure_core/Driver"
+         type="structure_core::Driver"
+         base_class_type="nodelet::Nodelet">
+    <description>This is the nodelet of ROS interface for Structure Core.</description>
+  </class>
+  <class name="structure_core/PointCloudXyzrgbNodelet"
+	     type="structure_core::PointCloudXyzrgbNodelet"
+	     base_class_type="nodelet::Nodelet">
+    <description>Nodelet to combine registered depth image and RGB image into XYZRGB point cloud.</description>
+  </class>
+  <class name="structure_core/PointCloudXyzNodelet"
+	     type="structure_core::PointCloudXyzNodelet"
+	     base_class_type="nodelet::Nodelet">
+    <description>Nodelet to convert depth image into  point cloud.</description>
+  </class>
+</library>

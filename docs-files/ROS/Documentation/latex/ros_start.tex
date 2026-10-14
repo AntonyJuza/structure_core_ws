@@ -1,0 +1,170 @@
+\hypertarget{ros_start_launch_ros1}{}\section{Launching R\+O\+S1 for Structure Core}\label{ros_start_launch_ros1}
+Use {\bfseries roslaunch} in a bash terminal to start the Structure Core R\+OS driver\+:
+
+
+\begin{DoxyCode}
+1 roslaunch structure\_core\_ros\_driver sc.launch
+\end{DoxyCode}
+
+
+Use {\ttfamily rostopic echo} to check a topic\textquotesingle{}s published data, e.\+g.
+
+
+\begin{DoxyCode}
+1 rostopic echo /sc/rgb/image
+\end{DoxyCode}
+
+
+For more information on available topics, see \hyperlink{ros_main_features_published_topics}{Topics and Parameters}.\hypertarget{ros_start_launch_ros1_rviz}{}\section{Launching R\+O\+S1 for Structure Core with Rviz}\label{ros_start_launch_ros1_rviz}
+Run the following command to start R\+O\+S1 together with Rviz\+:
+
+
+\begin{DoxyCode}
+1 roslaunch structure\_core\_ros\_driver sc\_rviz.launch
+\end{DoxyCode}
+
+
+The driver will start publishing messages that will be visualized in Rviz.
+
+
+
+~\newline
+\hypertarget{ros_start_data_management}{}\section{Data Management}\label{ros_start_data_management}
+\hypertarget{ros_start_image_view}{}\subsection{Data Visualization using the image\+\_\+view Package}\label{ros_start_image_view}
+Messages from running topics can also be visualized using the R\+OS package {\bfseries image\+\_\+view}. To display data using {\bfseries image\+\_\+view}, start two terminal instances. Launch the R\+O\+S1 in the first, and run the following command in the second\+:
+
+
+\begin{DoxyCode}
+1 rosrun image\_view image\_view image:=<topic name here>
+\end{DoxyCode}
+
+
+For more information on available topics, see \hyperlink{ros_main_features_published_topics}{Topics and Parameters}.
+
+\hypertarget{ros_start_store_data}{}\subsection{Storing published data}\label{ros_start_store_data}
+Use the R\+OS package {\bfseries rosbag} to store messages published by Structure Core R\+OS driver. To store all the data published by the R\+OS driver, run
+
+
+\begin{DoxyCode}
+1 rosbag record -a
+\end{DoxyCode}
+
+
+...while the R\+OS driver is running. All published topics should be accumulated in a rosbag file.
+
+To store messages from specific topics use the following command\+:
+
+
+\begin{DoxyCode}
+1 rosbag record -O subset <topic to store>
+\end{DoxyCode}
+
+
+To play data back use command\+:
+
+
+\begin{DoxyCode}
+1 rosbag play <bag file name>.bag
+\end{DoxyCode}
+
+
+and stored messages will be published to the same topics as they were published by the R\+O\+S1\hypertarget{ros_start_logging}{}\subsection{Logging}\label{ros_start_logging}
+All R\+OS logs should be stored in {\ttfamily .ros/log/}. Check the logs if you have any issues launching the R\+O\+S1; they often help solve the issue.
+
+~\newline
+\hypertarget{ros_start_integration}{}\section{Integration with other packages}\label{ros_start_integration}
+\subsection*{R\+G\+B-\/D point cloud construction with R\+OS depth\+\_\+image\+\_\+proc package}
+
+While R\+G\+B-\/D point cloud can be internally constructed and published by R\+O\+S1 for Structure Core, there is a possibility to do the same with external R\+OS packages. Additional package that should be installed\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries depth\+\_\+image\+\_\+proc}\+: sudo apt install ros-\/kinetic-\/depth-\/image-\/proc
+\end{DoxyItemize}
+
+R\+OS and R\+OS depth\+\_\+image\+\_\+proc nodes can be run using the following command\+:
+
+
+\begin{DoxyCode}
+1 roslaunch structure\_core\_ros\_driver depth\_proc\_rgbd\_cloud.launch
+\end{DoxyCode}
+\hypertarget{ros_start_localization}{}\subsection{R\+O\+S Mapping and localization}\label{ros_start_localization}
+Using the data from Structure Core and additional R\+OS packages the task of mapping and localization can be acomplished. Additional packages that should be installed\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries imu\+\_\+filter\+\_\+madgwick}\+: sudo apt-\/get install ros-\/kinetic-\/imu-\/filter-\/madgwick
+\item {\bfseries rtabmap\+\_\+ros}\+: sudo apt-\/get install ros-\/kinetic-\/rtabmap-\/ros
+\item {\bfseries robot\+\_\+localization}\+: sudo apt-\/get install ros-\/kinetic-\/robot-\/localization
+\end{DoxyItemize}
+
+R\+OS localization and mapping modules can be run using the following command\+:
+
+
+\begin{DoxyCode}
+1 roslaunch structure\_core\_ros\_driver ros\_odometry.launch
+\end{DoxyCode}
+\hypertarget{ros_start_opencv}{}\subsection{Open\+CV}\label{ros_start_opencv}
+In order to use R\+O\+S1 for Structure Core with Open\+CV next packages should be installed\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries opencv}\+: sudo apt-\/get install ros-\/kinetic-\/opencv3
+\item {\bfseries cv\+\_\+bridge}\+: sudo apt-\/get install ros-\/kinetic-\/cv-\/bridge
+\end{DoxyItemize}
+
+Sample code is located in {\bfseries ros1/examples/opencv\+Subscriber.\+cpp}. It shows how to subscribe and display color and depth images using Open\+CV and R\+O\+S1 for Structure Core.
+
+To run the example node use the following command\+:
+
+
+\begin{DoxyCode}
+1 rosrun structure\_core\_ros\_driver opencv\_subscriber
+\end{DoxyCode}
+\hypertarget{ros_start_pcl}{}\subsection{P\+CL}\label{ros_start_pcl}
+In order to use R\+O\+S1 for Structure Core with P\+CL next packages should be installed\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries P\+CL}\+: sudo apt-\/get install ros-\/kinetic-\/pcl-\/ros
+\item {\bfseries P\+C\+L\+\_\+conversions}\+: sudo apt-\/get install ros-\/kinetic-\/pcl-\/conversions
+\end{DoxyItemize}
+
+Sample code is located in {\bfseries ros1/examples/pcl\+Subscriber.\+cpp}. It shows how to subscribe and display R\+G\+B-\/D point cloud using P\+CL and R\+O\+S1 for Structure Core.
+
+To run the example node use the following command\+:
+
+
+\begin{DoxyCode}
+1 rosrun structure\_core\_ros\_driver pcl\_subscriber
+\end{DoxyCode}
+\hypertarget{ros_start_cartographer}{}\subsection{Cartographer R\+OS}\label{ros_start_cartographer}
+First Cartographer should be installed to the same workspace where R\+OS was installed using the steps described here\+: \href{https://google-cartographer-ros.readthedocs.io/en/latest/compilation.html}{\tt Cartographer building and installation}.
+
+Cartographer can be used with the data recorded from Structure Core to bag file.
+
+To create bag file run the following command\+:
+
+
+\begin{DoxyCode}
+1 roslaunch structure\_core\_ros\_driver sc\_bag\_for\_cartographer.launch
+\end{DoxyCode}
+
+
+Bag file will be created in {\ttfamily $\sim$/.ros/} directory.
+
+After that Cartographer can be used with created bag file\+:
+
+
+\begin{DoxyCode}
+1 roslaunch structure\_core\_ros\_driver demo\_sc\_cartographer.launch bag\_filename:=/path\_to\_bag\_file
+\end{DoxyCode}
+
+
+To run Cartographer in online mode use next command\+:
+
+
+\begin{DoxyCode}
+1 roslaunch structure\_core\_ros\_driver demo\_sc\_online\_cartographer.launch 
+\end{DoxyCode}
+ 

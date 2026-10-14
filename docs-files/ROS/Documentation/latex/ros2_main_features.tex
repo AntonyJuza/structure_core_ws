@@ -1,0 +1,68 @@
+\hypertarget{ros2_main_features_published2_topics}{}\section{1) Published Topics}\label{ros2_main_features_published2_topics}
+The following topics are available in Structure Core R\+OS Driver\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{sc/rgb/image}}\+: R\+GB image if color Structure Core is used and grayscale image if monochrome Structure Core is used.
+\item {\bfseries{sc/rgb/camera\+\_\+info}}\+: color intrinsics for the curren frame.
+\item {\bfseries{sc/depth/image}}\+: depth image(float depth values in meteres).
+\item {\bfseries{sc/depth/camera\+\_\+info}}\+: depth intrinsics for the current frame.
+\item {\bfseries{sc/color\+\_\+to\+\_\+depth\+\_\+tf}}\+: transformation matrix to bring a Structure Core visible (monochrome/\+R\+GB) camera frame into the depth frame of reference.
+\item {\bfseries{sc/infrared\+\_\+left/image}}\+: left infrared image(16bit data).
+\item {\bfseries{sc/infrared\+\_\+left/camera\+\_\+info}}\+: left infrared intrinsics for the current frame.
+\item {\bfseries{sc/infrared\+\_\+right/image}}\+: right infrared image(16bit data).
+\item {\bfseries{sc/infrared\+\_\+left/camera\+\_\+info}}\+: right infrared intrinsics for the current frame.
+\item {\bfseries{sc/rgbd/points}}\+: rgb-\/d pointcloud.
+\item {\bfseries{sc/imu/imu\+\_\+msg}}\+: 3-\/axis accelerometer data(meters per second) and 3-\/axis (Euler angles) gyroscope data(radians per second).
+\end{DoxyItemize}
+
+The list of topics during program execution can be listed using the following command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rostopic list}
+\end{DoxyCode}
+\hypertarget{ros2_main_features_sc_static_params2}{}\section{2) Structure Core Static Parameters}\label{ros2_main_features_sc_static_params2}
+Static and dynamic parameters can be modified before launch of the driver in {\bfseries{cfg/sc\+\_\+config.\+yaml}}.
+
+The following static parameters are available\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{visible\+\_\+enable}}\+: set to true to enable visible streaming.
+\item {\bfseries{visible\+\_\+apply\+\_\+gamma\+\_\+correction}}\+: set to true to apply gamma correction to incoming visible frames.
+\item {\bfseries{visible\+\_\+framerate}}\+: the target framerate for the visible camera. The default value is 30.
+\item {\bfseries{visible\+\_\+resolution}}\+: the target resolution for streamed visible frames. The default value is 640x480.
+\item {\bfseries{infrared\+\_\+enable}}\+: set to true to enable infrared streaming.
+\item {\bfseries{infrared\+\_\+framerate}}\+: the target framerate for the infrared camera. The default value is 30.
+\item {\bfseries{infrared\+\_\+mode}}\+: specifies how to stream the infrared frames. The default value is Both\+Cameras. Other options\+: Left\+Camera\+Only, Right\+Camera\+Only.
+\item {\bfseries{infrared\+\_\+resolution}}\+: the target resolution for streamed depth frames. The default value is 1280x960.
+\item {\bfseries{infrared\+\_\+disable\+\_\+intensity\+\_\+balance}}\+: setting this to true will eliminate saturation issues, but might result in sparser depth.
+\item {\bfseries{imu\+\_\+enable}}\+: set to true to enable accelerometer and gyroscope streaming.
+\item {\bfseries{imu\+\_\+update\+\_\+rate}}\+: the target stream rate for I\+MU data. The default value is Accel\+And\+Gyro\+\_\+800\+Hz. Other options\+: Accel\+And\+Gyro\+\_\+100\+Hz, Accel\+And\+Gyro\+\_\+200\+Hz, Accel\+And\+Gyro\+\_\+1000\+Hz.
+\item {\bfseries{depth\+\_\+enable}}\+: set to true to enable depth streaming.
+\item {\bfseries{depth\+\_\+framerate}}\+: the target framerate for the depth sensor. The default value is 30.
+\item {\bfseries{depth\+\_\+resolution}}\+: the target resolution for streamed depth frames. The default value is 640x480(\+V\+G\+A). Other options\+: 320x240(\+Q\+V\+G\+A), 1280x960(\+S\+X\+G\+A).
+\item {\bfseries{depth\+\_\+apply\+\_\+correction\+\_\+before\+\_\+stream}}\+: set to true to apply a correction and clean filter to the depth before streaming, such that depth frames received from the driver are post-\/processed before arrival.
+\item {\bfseries{demosaic\+\_\+method}}\+: the demosaicking method to use for color-\/enabled Structure Core visible frames. Will do nothing for monochrome visible frames. The default value is Edge\+Aware. Other options\+: Bilinear.
+\item {\bfseries{initial\+\_\+projector\+\_\+power}}\+: laser projector power setting from 0.\+0 to 1.\+0 inclusive. Projector will only activate if required by streaming configuration. The default value is 1.\+0.
+\item {\bfseries{latency\+\_\+reducer\+\_\+enabled}}\+: setting this to true will reduce latency, but might drop more frame.
+\item {\bfseries{sensor\+\_\+initialization\+\_\+timeout}}\+: maximum amount of time (in milliseconds) to wait for a sensor to connect before throwing a timeout error. The default value is 6000.
+\item {\bfseries{sensor\+\_\+serial}}\+: serial number of sensor to stream. If null, the first connected sensor will be used. The default value is null.
+\item {\bfseries{frame\+\_\+sync\+\_\+enabled}}\+: set to true to enable frame synchronization between visible or color and depth.
+\item {\bfseries{low\+\_\+latency\+\_\+imu}}\+: set to true to deliver I\+MU events on a separate, dedicated background thread.
+\item {\bfseries{rgbd\+\_\+enable}}\+: set to true to enable rgb-\/d streaming.
+\end{DoxyItemize}\hypertarget{ros2_main_features_sc_dynamic_params2}{}\section{3) Structure Core Dynamic Parameters}\label{ros2_main_features_sc_dynamic_params2}
+The following parameters are dynamic and can be changed during program execution without Structure Core R\+OS driver restart\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{visible\+\_\+initial\+\_\+gain}}\+: the visible gain to start streaming with. Can be any number between 1 and 8. The default value is 2.\+0.
+\item {\bfseries{visible\+\_\+initial\+\_\+exposure}}\+: the initial visible exposure to start streaming with (milliseconds, but set in seconds). Can be any number between 0 and 0.\+03. The default value is 0.\+016.
+\item {\bfseries{infrared\+\_\+auto\+\_\+exposure\+\_\+enabled}}\+: enable auto-\/exposure for infrared frames.
+\item {\bfseries{infrared\+\_\+initial\+\_\+exposure}}\+: The initial infrared exposure to start streaming with. Can be any number between 0 and 0.\+03. The default value is 0.\+0146.
+\item {\bfseries{infrared\+\_\+initial\+\_\+gain}}\+: the initial infrared gain to start streaming with. Can be 0, 1, 2, or 3. The default value is 3.
+\item {\bfseries{depth\+\_\+apply\+\_\+correction}}\+: applies a correction and clean filter to the depth on-\/the-\/fly, modifying the current object in place. Note that if {\bfseries{depth\+\_\+apply\+\_\+correction\+\_\+before\+\_\+stream}} is true, this setting does nothing, as the correction has already been applied in the driver before frame arrival.
+\item {\bfseries{depth\+\_\+range\+\_\+mode}}\+: the depth range mode for streamed depth frames. Modifies the min/max range of the depth values. The default value is Short(0.\+41m to 1.\+36m). Other options\+: Very\+Short(0.\+35m to 0.\+92m), Medium(0.\+52m to 5.\+23m), Long(0.\+58m to 8.\+0m), Very\+Long(0.\+58m to 10.\+0m), Hybrid(0.\+35m to 10.\+0m), Body\+Scanning(\+Specific configuration for scanning human bodies).
+\item {\bfseries{dynamic\+\_\+calibration\+\_\+mode}}\+: the dynamic calibration mode to use during depth streaming. The default value is Off. Other options\+: One\+Shot\+Persistent(a single dynamic calibration cycle is performed when depth streaming starts), Continuous\+Non\+Persistent(dynamic calibration is performed continuously as the sensor streams depth data). 
+\end{DoxyItemize}

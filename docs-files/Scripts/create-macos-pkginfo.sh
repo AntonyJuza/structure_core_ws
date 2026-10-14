@@ -1,0 +1,2 @@
+#!/bin/sh -e
+printf 'APPL????' >"$1"

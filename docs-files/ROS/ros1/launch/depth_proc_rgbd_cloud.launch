@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+	
+    <arg name="name" default="sc" />
+    <arg name="sc_depth_alignment" default="false" />
+
+	<include file="$(find structure_core_ros_driver)/launch/sc.launch">
+        <arg name="visible_enable" value="true" />
+        <arg name="depth_enable" value="true" />
+        <arg name="depth_aligned_enable" value="$(arg sc_depth_alignment)"/>
+        <arg name="ros_odometry" value="false"/>
+        <arg name="rgbd_enable" value="false" />
+        <arg name="name" value="$(arg name)" />
+    </include>
+
+    <!-- Register depth image to color frame -->
+     <node unless="$(arg sc_depth_alignment)" pkg="nodelet" type="nodelet" name="register_depth"
+          args="load depth_image_proc/register $(arg name)_node --no-bond">
+        <remap from="rgb/camera_info"             to="sc/rgb/camera_info" />
+        <remap from="depth/camera_info"           to="sc/depth/camera_info" />
+        <remap from="depth/image_rect"            to="sc/depth/image" />
+        <remap from="depth_registered/image_rect" to="$(arg name)/depth_aligned/image" />
+        <param name="queue_size"  value="50" />
+    </node>
+
+		
+    <!-- Convert into a point cloud -->
+    <node pkg="nodelet" type="nodelet" name="cloudify"
+        args="load depth_image_proc/point_cloud_xyzrgb $(arg name)_node  --no-bond">
+        <remap from="depth_registered/image_rect" to="$(arg name)/depth_aligned/image"/>
+        <remap from="depth_registered/points" to="$(arg name)/rgbd/points"/>
+        <remap from="rgb/image_rect_color" to="$(arg name)/rgb/image"/>
+        <remap from="rgb/camera_info" to="$(arg name)/rgb/camera_info"/>
+        <param name="queue_size"  value="50" />
+    </node>
+
+</launch>

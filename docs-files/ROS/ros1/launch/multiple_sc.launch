@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+	
+    <arg name="name_1" default="sc_1" />
+    <arg name="name_2" default="sc_2" />
+
+	<include file="$(find structure_core_ros_driver)/launch/sc.launch">
+        <arg name="visible_enable" value="true" />
+        <arg name="depth_enable" value="true" />
+        <arg name="name" value="$(arg name_1)" />
+    </include>
+
+    <include file="$(find structure_core_ros_driver)/launch/sc.launch">
+        <arg name="visible_enable" value="true" />
+        <arg name="depth_enable" value="true" />
+        <arg name="name" value="$(arg name_2)" />
+    </include>
+
+</launch>
