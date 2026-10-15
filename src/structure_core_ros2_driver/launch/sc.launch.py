@@ -36,10 +36,17 @@ def generate_launch_description():
         description='Path to RViz configuration file'
     )
 
+    publish_tf_arg = DeclareLaunchArgument(
+        'publish_standalone_tf',
+        default_value='false',
+        description='Publish standalone dummy TF transforms from sc_map (set false when mounted on robot URDF)'
+    )
+
     name = LaunchConfiguration('name')
     config_file = LaunchConfiguration('config_file')
     use_rviz = LaunchConfiguration('use_rviz')
     rviz_config = LaunchConfiguration('rviz_config')
+    publish_standalone_tf = LaunchConfiguration('publish_standalone_tf')
 
     camera_node = Node(
         package='structure_core_ros2_driver',
@@ -50,7 +57,7 @@ def generate_launch_description():
         parameters=[config_file, {'name': name}],
     )
 
-    # Static transforms compliant with ROS 2 Jazzy static_transform_publisher
+    # Static transforms compliant with ROS 2 Jazzy static_transform_publisher (only used in standalone mode)
     tf_color_broadcaster = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
@@ -60,7 +67,8 @@ def generate_launch_description():
             '--child-frame-id', [name, '_color_frame'],
             '--x', '0', '--y', '0', '--z', '0',
             '--roll', '0', '--pitch', '0', '--yaw', '0'
-        ]
+        ],
+        condition=IfCondition(publish_standalone_tf)
     )
 
     tf_depth_broadcaster = Node(
@@ -72,7 +80,8 @@ def generate_launch_description():
             '--child-frame-id', [name, '_cloud_tf_frame'],
             '--x', '0', '--y', '0', '--z', '0',
             '--roll', '0', '--pitch', '0', '--yaw', '0'
-        ]
+        ],
+        condition=IfCondition(publish_standalone_tf)
     )
 
     rviz_node = Node(
@@ -89,6 +98,7 @@ def generate_launch_description():
         config_arg,
         use_rviz_arg,
         rviz_config_arg,
+        publish_tf_arg,
         camera_node,
         tf_color_broadcaster,
         tf_depth_broadcaster,

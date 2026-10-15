@@ -1,6 +1,6 @@
 # ROS 2 workspace build artifacts
 build/
-install/
+install/    
 log/
 .colcon/
 

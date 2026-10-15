@@ -13,7 +13,7 @@
     imu_update_rate:                      "Default"     # HowMany, AccelAndGyro_1000Hz, AccelAndGyro_400Hz, AccelAndGyro_200Hz, AccelAndGyro_100Hz
     depth_enable:                         true
     depth_aligned_enable:                 true
-    depth_pcloud_enable:                  false
+    depth_pcloud_enable:                  true
     depth_framerate:                      30.0
     depth_resolution:                     "Default"     # SXGA, VGA, QVGA, HowMany, _1280x960, _640x480, _320x240
     depth_apply_correction_before_stream: false
